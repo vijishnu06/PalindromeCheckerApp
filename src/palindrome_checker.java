@@ -1,43 +1,39 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class palindrome_checker {
     public static void main(String[] args) {
 
 
-        String word = "level";
+        String word = "rotor";
 
-        // Create a Queue (FIFO)
-        Queue<Character> queue = new LinkedList<>();
+        // Create a Deque (double-ended queue)
+        Deque<Character> deque = new ArrayDeque<>();
 
-
-        Stack<Character> stack = new Stack<>();
-
-
+        // Insert characters into deque
         for (char c : word.toCharArray()) {
-            queue.add(c);
-            stack.push(c);
+            deque.addLast(c);  // Insert at rear
         }
 
-
+        // Flag to track palindrome
         boolean isPalindrome = true;
 
-        while (!queue.isEmpty() && !stack.isEmpty()) {
-            char fromQueue = queue.poll();
-            char fromStack = stack.pop();
+        // Compare front and rear elements until deque is empty or mismatch
+        while (deque.size() > 1) {
+            char front = deque.removeFirst(); // Remove from front
+            char rear = deque.removeLast();   // Remove from rear
 
-            if (fromQueue != fromStack) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
-
+        // Print result
         if (isPalindrome) {
-            System.out.println(word + " is a Palindrome (Queue vs Stack comparison)");
+            System.out.println(word + " is a Palindrome (Deque check)");
         } else {
-            System.out.println(word + " is NOT a Palindrome (Queue vs Stack comparison)");
+            System.out.println(word + " is NOT a Palindrome (Deque check)");
         }
     }
 }
