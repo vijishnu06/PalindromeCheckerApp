@@ -1,29 +1,43 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
+
 public class palindrome_checker {
     public static void main(String[] args) {
 
 
-        String original = "radar";
+        String word = "level";
 
-        // Create a stack to hold characters
+        // Create a Queue (FIFO)
+        Queue<Character> queue = new LinkedList<>();
+
+
         Stack<Character> stack = new Stack<>();
 
-        // Push all characters into the stack
-        for (int i = 0; i < original.length(); i++) {
-            stack.push(original.charAt(i));
+
+        for (char c : word.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
         }
 
-        // Build reversed string by popping from stack
-        String reversed = "";
-        while (!stack.isEmpty()) {
-            reversed += stack.pop();
+
+        boolean isPalindrome = true;
+
+        while (!queue.isEmpty() && !stack.isEmpty()) {
+            char fromQueue = queue.poll();
+            char fromStack = stack.pop();
+
+            if (fromQueue != fromStack) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare original with reversed
-        if (original.equals(reversed)) {
-            System.out.println(original + " is a Palindrome");
+
+        if (isPalindrome) {
+            System.out.println(word + " is a Palindrome (Queue vs Stack comparison)");
         } else {
-            System.out.println(original + " is NOT a Palindrome");
+            System.out.println(word + " is NOT a Palindrome (Queue vs Stack comparison)");
         }
     }
 }
