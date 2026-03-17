@@ -1,39 +1,36 @@
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.LinkedList;
 
 public class palindrome_checker {
     public static void main(String[] args) {
 
 
-        String word = "rotor";
+        String input = "level";
 
-        // Create a Deque (double-ended queue)
-        Deque<Character> deque = new ArrayDeque<>();
 
-        // Insert characters into deque
-        for (char c : word.toCharArray()) {
-            deque.addLast(c);  // Insert at rear
+        if (input == null) {
+            System.out.println("Input is null");
+            return;
         }
 
-        // Flag to track palindrome
+
+        LinkedList<Character> list = new LinkedList<>();
+
+
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
         boolean isPalindrome = true;
 
-        // Compare front and rear elements until deque is empty or mismatch
-        while (deque.size() > 1) {
-            char front = deque.removeFirst(); // Remove from front
-            char rear = deque.removeLast();   // Remove from rear
 
-            if (front != rear) {
+        while (list.size() > 1) {
+            if (!list.removeFirst().equals(list.removeLast())) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Print result
-        if (isPalindrome) {
-            System.out.println(word + " is a Palindrome (Deque check)");
-        } else {
-            System.out.println(word + " is NOT a Palindrome (Deque check)");
-        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
